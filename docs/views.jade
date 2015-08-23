@@ -1,0 +1,41 @@
+extends ../views/single_layout
+
+block content
+  :markdown
+    ### Views
+
+    Roots supports a [multitude](https://github.com/jenius/accord#html) of view engines through the [accord](https://github.com/jenius/accord) library.
+
+    ### View engines
+    By default, the roots [base](https://github.com/roots-dev/base) includes the jade view engine.
+
+    To configure the view engine, you need the details for it. To get these, go to [accord's adapter directory](https://github.com/jenius/accord/tree/master/lib/adapters) and select the directory of the engine you are looking for, e.g. ejs. You will then need the file named in the format `y.x.coffee`.
+
+    First we need to find the `supportedEngines` property, or if not present, the `name` property. This is the name of the npm package you need to install,
+
+    #### Let's try some examples:
+
+    [jade](https://github.com/jenius/accord/blob/master/lib/adapters/jade/1.x.coffee) has a `supportedEngines` array. It tells me I can use either `yade` or `jade` packages for rendering jade. Let's go a little unconventional, and try the yade engine:
+    ```
+    npm install --save yade # remove jade if you have it installed
+    ```
+    ---
+    However, 
+    [ejs](https://github.com/jenius/accord/blob/master/lib/adapters/ejs/2.x.coffee) lacks a `supportedEngines` property, so I would just use name:
+    ```
+    npm install --save ejs
+    ```
+
+    ### Default locals 
+    Views are provided with a few locals by default:
+    - `_path` This is the URL path for the current page
+
+    ### Custom locals
+    To add locals to your project, you can modify the `app.coffee` with a new property `locals`
+
+    ```coffee
+      locals:
+        title: 'Roots: Enlightened Static Sites'
+        author: 'Jeff Escalante'
+        description: 'Roots: a modern, powerful, and open source static site generator'
+    ```
