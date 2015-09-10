@@ -9,23 +9,36 @@ block content
     ### View engines
     By default, the roots [base](https://github.com/roots-dev/base) includes the jade view engine.
 
-    To configure the view engine, you need the details for it. To get these, go to [accord's adapter directory](https://github.com/jenius/accord/tree/master/lib/adapters) and select the directory of the engine you are looking for, e.g. ejs. You will then need the file named in the format `y.x.coffee`.
+    A view engine is the name of an npm package, 
 
-    First we need to find the `supportedEngines` property, or if not present, the `name` property. This is the name of the npm package you need to install,
+    Here is the setup for various views:
 
-    #### Let's try some examples:
+  table
+    thead
+      tr
+        th Name
+        th Supported Engines
+        th Extensions
+    tbody
+      mixin engine(name, engines, extensions)
+        tr
+          td= name
+          td= engines
+          td= extensions
 
-    [jade](https://github.com/jenius/accord/blob/master/lib/adapters/jade/1.x.coffee) has a `supportedEngines` array. It tells me I can use either `yade` or `jade` packages for rendering jade. Let's go a little unconventional, and try the yade engine:
-    ```
-    npm install --save yade # remove jade if you have it installed
-    ```
-    ---
-    However, 
-    [ejs](https://github.com/jenius/accord/blob/master/lib/adapters/ejs/2.x.coffee) lacks a `supportedEngines` property, so I would just use name:
-    ```
-    npm install --save ejs
-    ```
+      +engine('Jade', 'Yade, Jade', '.jade')
+      +engine('Eco', 'Eco', '.eco')
+      +engine('Ejs', 'Ejs', '.ejs')
+      +engine('Markdown', 'Marked', '.md .mdown .markdown')
+      +engine('Mustache', 'Hogan', '.mustache .hogan')
+      +engine('Handlebars', 'handlebars', '.hbs .handlebars')
+      +engine('Haml', 'hamljs', '.haml')
+      +engine('Swig', 'swig', '.swig')
+      +engine('Marc', 'marc', '.md')
+      +engine('Toffee', 'toffee', '.toffee')
+      +engine('Dot', 'dot', '.dot')
 
+  :markdown
     ### Default locals 
     Views are provided with a few locals by default:
     - `_path` This is the URL path for the current page
